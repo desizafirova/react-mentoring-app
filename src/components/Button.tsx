@@ -4,7 +4,7 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & { href?: never };
 
 type LinkProps = ComponentPropsWithoutRef<'a'> & { href: string };
 
-function isAnchorProps(props: ButtonProps | LinkProps): props is AnchorProps {
+function isAnchorProps(props: ButtonProps | LinkProps): props is LinkProps {
   return 'href' in props;
 }
 
