@@ -1,10 +1,30 @@
+import Button from './Button';
 import Navigation from './Navigation';
 
 export default function Header() {
   return (
-    <header className="flex">
-      <h2>ReactMentoring</h2>
+    <header id="main-header">
+      <h1>ReactMentoring</h1>
       <Navigation />
+      <nav>
+        <ul>
+          <li>
+            <Button href="/" textOnly={true}>
+              Our Mission
+            </Button>
+          </li>
+          <li>
+            <Button href="/sessions" textOnly={true}>
+              Browse Sessions
+            </Button>
+          </li>
+          <li>
+            <Button href="/sessions" textOnly={false}>
+              Upcoming Sessions
+            </Button>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

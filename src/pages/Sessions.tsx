@@ -1,3 +1,4 @@
+import SessionBlock from '../components/SessionBlock.tsx';
 import { SESSIONS } from '../dummy-sessions.ts'; // normally, we would probably load that from a server
 
 export default function SessionsPage() {
@@ -11,7 +12,16 @@ export default function SessionsPage() {
           you!
         </p>
       </header>
-      {/* Todo: Output list of sessions */}
+      <article id="sessions-list">
+        {SESSIONS.map((session) => (
+          <SessionBlock
+            key={session.id}
+            title={session.title}
+            image={session.image}
+            summary={session.summary}
+          />
+        ))}
+      </article>
     </main>
   );
 }
