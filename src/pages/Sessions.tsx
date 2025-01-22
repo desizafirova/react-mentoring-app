@@ -19,6 +19,7 @@ export default function SessionsPage() {
             title={session.title}
             image={session.image}
             summary={session.summary}
+            id={session.id}
           />
         ))}
       </article>

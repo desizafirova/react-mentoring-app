@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export type ModalHandle = {
-  openModal: () => void;
-  closeModal: () => void;
+  open: () => void;
+  close: () => void;
 };
 
 const Modal = forwardRef<ModalHandle, { children: React.ReactNode }>(
@@ -10,11 +10,15 @@ const Modal = forwardRef<ModalHandle, { children: React.ReactNode }>(
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     useImperativeHandle(ref, () => ({
-      openModal: () => dialogRef.current?.showModal(),
-      closeModal: () => dialogRef.current?.close(),
+      open: () => dialogRef.current?.showModal(),
+      close: () => dialogRef.current?.close(),
     }));
 
-    return <dialog ref={dialogRef}>{props.children}</dialog>;
+    return (
+      <dialog className="modal" ref={dialogRef}>
+        {props.children}
+      </dialog>
+    );
   }
 );
 
