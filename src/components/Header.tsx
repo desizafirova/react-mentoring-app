@@ -1,11 +1,9 @@
 import Button from './Button';
-import Navigation from './Navigation';
 
 export default function Header() {
   return (
     <header id="main-header">
       <h1>ReactMentoring</h1>
-      <Navigation />
       <nav>
         <ul>
           <li>
