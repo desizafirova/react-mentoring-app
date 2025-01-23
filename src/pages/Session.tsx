@@ -27,7 +27,9 @@ export default function SessionPage() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     console.log(data);
-    if (loadedSession) sessionCtx.addSession(loadedSession);
+    if (loadedSession) {
+      sessionCtx.addSession(loadedSession);
+    }
     closeModal();
   };
 
