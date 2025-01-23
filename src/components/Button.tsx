@@ -17,22 +17,25 @@ function isAnchorProps(props: ButtonProps | LinkProps): props is LinkProps {
 }
 
 export default function Button(props: ButtonProps | LinkProps) {
-  if (isAnchorProps(props))
+  if (isAnchorProps(props)) {
+    const { textOnly, children, ...otherProps } = props;
     return (
       <a
-        className={`button ${props.textOnly && `button--text-only`}`}
-        {...props}
+        className={`button ${textOnly ? 'button--text-only' : ''}`}
+        {...otherProps}
       >
-        {props.children}
+        {children}
       </a>
     );
-
-  return (
-    <button
-      className={`button ${props.textOnly && `button--text-only`}`}
-      {...props}
-    >
-      {props.children}
-    </button>
-  );
+  } else {
+    const { textOnly, children, ...otherProps } = props;
+    return (
+      <button
+        className={`button ${textOnly ? 'button--text-only' : ''}`}
+        {...otherProps}
+      >
+        {children}
+      </button>
+    );
+  }
 }

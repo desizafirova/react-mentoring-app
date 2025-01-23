@@ -2,8 +2,30 @@ import { useParams } from 'react-router-dom';
 
 import { SESSIONS } from '../dummy-sessions.ts';
 import Button from '../components/Button.tsx';
+import Modal, { ModalHandle } from '../components/Modal.tsx';
+import { FormEvent, useRef } from 'react';
+import Input from '../components/Input.tsx';
 
 export default function SessionPage() {
+  const modalRef = useRef<ModalHandle>(null);
+
+  const openModal = () => {
+    modalRef.current?.open();
+  };
+  const closeModal = () => {
+    modalRef.current?.close();
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    const enteredEmail = data.email;
+    const enteredName = data.name;
+    console.log(enteredEmail, enteredName);
+    closeModal();
+  };
+
   const params = useParams<{ id: string }>();
 
   const sessionId = params.id;
@@ -32,12 +54,27 @@ export default function SessionPage() {
               })}
             </time>
             <p>
-              <Button textOnly={false}>Book session</Button>
+              <Button onClick={openModal} textOnly={false}>
+                Book session
+              </Button>
             </p>
           </div>
         </header>
         <p id="content">{loadedSession.description}</p>
       </article>
+      <Modal ref={modalRef}>
+        <form onSubmit={handleSubmit}>
+          <h3>Book Session</h3>
+          <Input id="name" type="text" label="Your name" />
+          <Input id="email" type="text" label="Your email" />
+          <div className="flex-container-btns">
+            <Button onClick={closeModal} textOnly={true}>
+              Cancel
+            </Button>
+            <Button textOnly={false}>Book Session</Button>
+          </div>
+        </form>
+      </Modal>
     </main>
   );
 }

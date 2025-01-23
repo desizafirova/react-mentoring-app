@@ -332,3 +332,9 @@ ul {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 3rem;
 }
+
+.flex-container-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
