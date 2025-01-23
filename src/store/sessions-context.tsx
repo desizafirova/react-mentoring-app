@@ -19,12 +19,12 @@ type SessionsContextValue = SessionsState & {
   removeSession: (sessionId: string) => void;
 };
 
-export const SessionsContext = createContext<SessionsState | null>(null);
+export const SessionsContext = createContext<SessionsContextValue | null>(null);
 
 export function useSessionsContext() {
   const sessionsContext = useContext(SessionsContext);
 
-  if (sessionsContext === null) {
+  if (!sessionsContext) {
     throw new Error('SessionsContext is null');
   }
 
@@ -43,7 +43,7 @@ type RemoveSessionAction = {
 
 type Action = AddSessionAction | RemoveSessionAction;
 
-function sessionsReducer(state: SessionsState, action: Action): SessionsState {
+function sessionsReducer(state: SessionsState, action: Action) {
   if (action.type === 'ADD_SESSION') {
     if (
       state.upcomingSessions.some((session) => session.id === action.payload.id)

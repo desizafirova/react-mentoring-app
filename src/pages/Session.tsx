@@ -5,9 +5,15 @@ import Button from '../components/Button.tsx';
 import Modal, { ModalHandle } from '../components/Modal.tsx';
 import { FormEvent, useRef } from 'react';
 import Input from '../components/Input.tsx';
+import { useSessionsContext } from '../store/sessions-context.tsx';
 
 export default function SessionPage() {
   const modalRef = useRef<ModalHandle>(null);
+  const sessionCtx = useSessionsContext();
+  const params = useParams<{ id: string }>();
+
+  const sessionId = params.id;
+  const loadedSession = SESSIONS.find((session) => session.id === sessionId);
 
   const openModal = () => {
     modalRef.current?.open();
@@ -20,16 +26,10 @@ export default function SessionPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const enteredEmail = data.email;
-    const enteredName = data.name;
-    console.log(enteredEmail, enteredName);
+    console.log(data);
+    if (loadedSession) sessionCtx.addSession(loadedSession);
     closeModal();
   };
-
-  const params = useParams<{ id: string }>();
-
-  const sessionId = params.id;
-  const loadedSession = SESSIONS.find((session) => session.id === sessionId);
 
   if (!loadedSession) {
     return (
