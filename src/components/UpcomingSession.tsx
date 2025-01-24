@@ -16,7 +16,7 @@ export default function UpcomingSession({
   id,
   onClose,
 }: UpcomingSessionProps) {
-  const { removeSession, upcomingSessions } = useSessionsContext();
+  const { removeSession } = useSessionsContext();
 
   function handleRemoveSession() {
     removeSession(id);

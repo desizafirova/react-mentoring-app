@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
 import Button from './Button';
 import UpcomingSessions from '../pages/UpcomingSessions';
 import Modal, { ModalHandle } from './Modal';
-import { useSessionsContext } from '../store/sessions-context';
+
+import { useRef } from 'react';
 
 export default function Header() {
   const modalRef = useRef<ModalHandle>(null);
-  const { upcomingSessions } = useSessionsContext();
 
   const openModal = () => {
     modalRef.current?.open();
@@ -18,7 +17,6 @@ export default function Header() {
 
   function handleUpcomingSessions() {
     openModal();
-    // if (upcomingSessions.length === 0) closeModal();
   }
 
   return (
